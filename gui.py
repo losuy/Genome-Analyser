@@ -1,17 +1,30 @@
 import tkinter as tk
+import customtkinter as CTk
 
 class App(tk.Tk):
     def __init__(self,title,size):
         super().__init__()
 
         self.geometry(f"{size[0]}x{size[1]}")
+
         self.title(title)
         self.resizable(0,0)
-        self.main = Main(self)
-        self.menu = Menu(self,self.main)
+        self.app_frame = App_frame(self)
+        self.main = Main(self.app_frame)
+        self.menu = Menu(self.app_frame,self.main)
 
         self.mainloop()
 
+
+class App_frame(tk.Frame):
+    def __init__(self,parent):
+        super().__init__(parent)
+
+        self.image = tk.PhotoImage(file='project/images/Untitled_design.png')
+        self.label = tk.Label(self,image=self.image)
+        self.label.place(x=0,y=0)
+
+        self.place(x=0,y=0,relwidth=1,relheight=1)
 
 
 class Menu(tk.Frame):
@@ -20,7 +33,7 @@ class Menu(tk.Frame):
 
         self.main = main
         self.create_widget()
-        self.place(x=0,y=0,relwidth=0.3,relheight=1)
+        self.place(x=10,y=10,relwidth=0.3,relheight=0.97)
 
     def create_widget(self):
        button_1 = tk.Button(self,text = 'button 1',
@@ -52,7 +65,7 @@ class Main(tk.Frame):
         self.pages = {}
 
         print(self.create_and_map_pages())
-        self.place(relx=0.3,y=0,relwidth=0.7,relheight=1)
+        self.place(x=0,relx=0.33,y=10,relwidth=0.66,relheight=0.97)
  
 
     def create_and_map_pages(self):
