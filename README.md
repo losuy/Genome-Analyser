@@ -1,4 +1,5 @@
 # Genome-Analyser
+Use the gui.py file cause that is the main file and import the images(important)
 # Notes for future
 file slected from one gui window (fasta file)
 fasta file content or the entire file loaded  into pseudo texteditor 
