@@ -1,38 +1,45 @@
-# import tkinter as tk
-# from Bio.Seq import Seq
+import tkinter as tk
+from Bio.Seq import Seq
 
 
 
 
-# option = ['compliment','reverse compliment','transcribe','translate']
+options = ['compliment','reverse compliment','transcribe','translate']
 
-# app = tk.Tk()
-# app.geometry("800x600")
-
-# variable = tk.StringVar(app)
+app = tk.Tk()
+app.geometry("800x600")
 
 
+frame = tk.Frame(app,bg='red')
+frame.pack(fill='both',expand=True) 
+widget_frame = tk.Frame(frame,bg='yellow')
+widget_frame.place(x=9,y=10,relwidth=0.98,relheight=0.06)
 
-# # frame = tk.Frame(app,bg='red')
-# # frame.pack(fill='both',expand=True) 
-# # widget_frame = tk.Frame(frame,bg='yellow')
-# # widget_frame.place(rely=0.1,relheight=0.2,relwidth=1)
+check_frame = tk.Frame(frame,bg='blue')
+check_frame.place(x=10,rely=0.09,relwidth=0.98,relheight=0.9)
 
-# # check_frame = tk.Frame(frame,bg='blue')
-# # check_frame.place(rely=0.3,relheight=0.4,relwidth=1)
+sequence = Seq('AGTTAGTCCTAGTCCCTATA')
 
+standard_option = tk.StringVar()
+standard_option.set(options[1])
+op = tk.StringVar()
+op.set(standard_option.get())
 
-# def procedure(sequence):
-#     funcs = {'compliment':sequence.complement,
-#              'reverse compliment':sequence.reverse_complement,
-#              'transcribe':sequence.transcribe,
-#              'translate':sequence.translate}
+# def select_caller(value):
+#     op.set(standard_option.get())
+
+def button_caller():
+    pass
+
+def procedure():
+    funcs = {'compliment':sequence.complement,
+             'reverse compliment':sequence.reverse_complement,
+             'transcribe':sequence.transcribe,
+             'translate':sequence.translate}
     
-#     lst = [i.get() for i in c]
-#     for item in lst:
-#         if item:
-#             with open('test.txt','a') as f:
-#                 f.write(f'{str(funcs[item]())} \n')
+    text.insert(tk.END,funcs[standard_option.get()]() + '\n')
+    
+    
 
 # def validate_dna_sequence():
 #     sequence = Seq(entry.get())
@@ -59,17 +66,27 @@
 
 # #     return temporary_list
 
-# # entry = tk.Entry(widget_frame,textvariable='')
-# # button = tk.Button(widget_frame,text='PRESS',command=validate_dna_sequence)
+drop_down = tk.OptionMenu(widget_frame,standard_option,*options)
+text = tk.Text(check_frame)
+
+button = tk.Button(widget_frame,text='PRESS',command=procedure)
 # # option_validate_button = tk.Button(check_frame,text='PRESS',command=validate_dna_sequence)
 # # c = create_check_boxes(option)
 
 # # option_validate_button.pack(side=tk.TOP,padx=10,anchor=tk.W,expand=True)
-# # entry.pack(side='left',expand=True,fill='both')
-# # button.pack(side='right',fill='both',expand=True)
+widget_frame.columnconfigure((0,1,2),weight=1)
+widget_frame.rowconfigure(0,weight=1)
+drop_down.grid(row=0,column=0,columnspan=2,sticky=tk.NSEW)
+button.grid(row=0,column=2,sticky=tk.NSEW)
+text.pack(expand=True,fill='both')
 
+# lst = [i.get() for i in c]
+#     for item in lst:
+#         if item:
+#             with open('test.txt','a') as f:
+#                 f.write(f'{str(funcs[item]())} \n')
+# Might come in handy
 
-
-# app.mainloop()
+app.mainloop()
 
 
